@@ -6,9 +6,11 @@ const ejsLayouts = require('express-ejs-layouts')
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
+//body parser middleware (to read req.body)
+app.use(express.urlencoded({extended: false}))
+
 //set up middleware for controllers
 app.use('/auth', require('./controllers/auth.js'))
-
 
 app.get('/', (req, res)=> {
     res.send('HOME ROUTE')
