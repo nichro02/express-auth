@@ -5,3 +5,6 @@
 * Touch a .gitignore file (echo "node_modules" >> .gitignore)
 * Create views and controllers folders
 * Create signup and login forms, test corresponding post routes
+* Install and initialize sequelize
+    * npm i sequelize pg
+    * sequelize init
