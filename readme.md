@@ -1,3 +1,38 @@
+# HOW TO WORK OFF OF THIS PROJECT
+1. Fork & clone repo
+2. Install dependencies 
+    -> npm i
+3. Create a `config .json` with the following code:
+{
+  "development": {
+    "database": "insert db name here",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "database": "insert db name here",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "database": "insert db name here",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
+
+** Note: If your database requires username and password, you will need to include these fields as well
+
+4. Create a database
+    -> sequelize db:create databaseName
+
+5. Migrate user model to database
+    -> sequelize db:migrate
+
+6. Add SESSION_SECRET and PORT environment variables in a .env file (variable can be any string)
+
+7. Run nodemon to start app in browser
+
 # EXPRESS AUTH BOILERPLATE
 * Set up Express app and entry point JS
 * Initialize git
