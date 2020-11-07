@@ -25,16 +25,21 @@ router.post('/signup', (req, res)=> {
             console.log(`CREATED USER----> ${createdUser}`)
             //log new user in
             passport.authenticate('local' , {
-                successRedirect: '/'
+                successRedirect: '/',
+                successFlash: 'Account created and logged in!'//flash message
             })(req, res) //(req, res) is an immediately invoked function
         } else {
-            console.log('Account with that email already exists. Try logging in')
+            req.flash('error', 'email already exists, try logging in')
+            res.redirect('/auth/login')
+            //console.log('Account with that email already exists. Try logging in')
         }
         //redirect to login page
         //res.redirect('/auth/login')
     })
     .catch(err=>{
-        console.log('Did not post new signup to database --->', err)
+        //console.log('Did not post new signup to database --->', err)
+        req.flash('error', err.message)
+        res.redirect('/auth/signup')
     })
 })
 
@@ -44,11 +49,14 @@ router.get('/login', (req, res)=> {
 
 router.post('/login', passport.authenticate('local', {
     failureRedirect: '/auth/login',
-    successRedirect: '/'
+    successRedirect: '/',
+    failureFlash: 'Invalid email or password',
+    successFlash: 'You are now logged in'
 }))
 
 router.get('/logout', (req, res) => {
     req.logout()
+    req.flash('Successfully logged out')
     res.redirect('/')
 })
 
